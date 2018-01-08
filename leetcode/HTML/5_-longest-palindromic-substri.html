@@ -1,0 +1,274 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+   <title>Introduction &gt; 5. Longest Palindromic Substring</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta name="description" content="Longest Palindromic Substring &nbsp;Manacher算法 最自然的解法就是以一个字符为中点依次左右展开对比，但是这样的做法面临奇数偶数的问题。也就是回文串存在以下的两种形式,在这种情况下面临着使用两套算法来判断的向题,极大的增加了解答问题的难度那么此处使用一种更灵巧的方法.在每个字符之间增加一个分割符# &nbsp; &nbsp; 需要将输" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <link type="text/css" href="custom.css" rel="stylesheet" />
+
+   <style TYPE="text/css" media="screen"> 
+      html, body { margin:0; 
+        padding:0; 
+        background: #ffffff; 
+      } 
+      div#printheader { display: none; }
+      #idheader { 
+        width:100%; 
+        height:auto; 
+        padding: 0; 
+        margin: 0;
+        position: fixed;
+        top: 0;
+        z-index: 2;
+      } 
+      /* The "min-height" for "#idheader table" ensures that the (blue) header of the topic
+         has at least the same height as the header of the navigation panel left of it */
+      #idheader table { background: #404040; min-height: 59px }             
+      #idheader h1 span { color: #FFF }     
+      #idnav {
+        text-align: right;
+        width: 126px;
+        vertical-align: middle;        
+      } 
+      #idnav a { text-decoration: none }
+      #idnav span {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        margin-left: 4px;
+        background:url('hm_webhelp_buttons_white.png') top left no-repeat;
+      } 
+      #idnav a span {
+        background-image:url('hm_webhelp_buttons_grey.png');
+      } 
+      #idnav a span:hover {
+        background-image:url('hm_webhelp_buttons_orange.png');
+      } 
+      #idnav span.hmbtnprev { background-position: 0 -32px }
+      #idnav span.hmbtnnext { background-position: -24px -32px }
+      #idnav span.hmbtntop  { background-position: -48px -32px }
+      #idnav span.hmbtntoggle  { width: 20px; background-position: -70px -32px }
+      #idnav span.hmbtnprint  { background-position: -88px -32px }
+
+      #callout-table, #overview-table {display:block; position:relative; top:0; left:0;}
+      #callout-icon {display:block; position:absolute; top:-11px; left:-11px;}
+      #callout-icon-flag {display:block; position:absolute; top:-11px; left:-8px;}
+      #callout-table a {text-decoration: none; color: blue;}
+      #callout-table a:visited {text-decoration: none; color: blue;}
+      #overview-table a {text-decoration: none; color: black;}
+      #overview-table a:visited {text-decoration: none; color: black;}
+      #callout-table a:hover, #overview-table a:hover {text-decoration: underline;}       
+      p.help-url { margin: 20px 0 5px 0; text-align: center; font-size: 80%; text-decoration: none }      
+      #switchtoggles { text-align: right; padding: 0 2px 0 0; font-size: 90%; } 
+      .sync-toc { color: #FFF; font-size: 8pt; font-weight: bold; display: none; }
+      .sync-toc a { color: #FFF; text-decoration: none; font-weight: bold;}
+      .sync-toc a:visited { color: #FFF; }
+      .sync-toc a:hover { text-decoration: underline; }
+      a.hmanchor { display: inline-block; margin-top: -4em; padding-top: 4em }	  
+   </style>
+   <style TYPE="text/css" media="print">
+      div#idheader, img.dropdown-toggle-icon, p.help-url { display:none } 
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "5_-longest-palindromic-substri.html");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<div id="printheader"><h1 class="p_Heading1" style="page-break-after: avoid;"><span class="f_Heading1">5. Longest Palindromic Substring</span></h1>
+</div>
+<div id="idheader">
+<div id="idheaderbg">
+<table style="width:100%;border:none;margin:0px;" cellspacing="0" cellpadding="0"> 
+  <tr>
+    <td class="topichead" style="text-align:left; vertical-align:bottom">
+      <p class="sync-toc">&lt;&lt; <a rel="nofollow" href="index.html?5_-longest-palindromic-substri.html" target="_top">Click to Display Table of Contents</a> &gt;&gt;</p>
+      <p class="crumbs"><b>Navigation:</b>&nbsp;
+      
+      <a href="introduction.html">Introduction</a>&nbsp;&gt;</p>
+   
+      <h1 class="p_Heading1" style="page-break-after: avoid;"><span class="f_Heading1">5. Longest Palindromic Substring</span></h1>
+
+    </td>
+    <td class="topichead" id="idnav">
+      <a href="javascript:HMToggleExpandAll(!HMAnyToggleOpen())" title="Click to open/close expanding sections"><span class="hmbtntoggle"></span></a>
+      <a href="second-topic.html" title="Previous Topic"><span class="hmbtnprev"></span></a>
+      <a href="introduction.html" title="Parent Chapter"><span class="hmbtntop"></span></a>
+      <span class="hmbtnnext"></span>
+      
+    </td>
+  </tr>  
+</table>
+</div>
+</div>  
+
+<div id="idcontent"><div id="innerdiv">
+<!-- Ask Internet Explorer 6.users to update their obsolete and dangerous browser --> 
+<!--[if lt IE 7]><div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;'><a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div><![endif]-->
+
+<!--ZOOMRESTART-->
+<h2 class="p_Heading2" style="page-break-after: avoid;"><span class="f_Heading2"><a href="https://leetcode.com/problems/longest-palindromic-substring/description/" target="_blank" class="weblink">Longest Palindromic Substring</a></span></h2>
+<p class="p_Normal">&nbsp;</p>
+<h2 class="p_Heading2" style="page-break-after: avoid;"><span class="f_Heading2">Manacher算法</span></h2>
+<p class="p_BodyText"><span class="f_BodyText">最自然的解法就是以一个字符为中点依次左右展开对比，但是这样的做法面临奇数偶数的问题。也就是回文串存在以下的两种形式,在这种情况下面临着使用两套算法来判断的向题,极大的增加了解答问题的难度那么此处使用一种更灵巧的方法.在每个字符之间增加一个分割符#</span></p>
+<p class="p_BodyText"><img alt="5-02" width="193" height="163" style="margin:0;width:193px;height:163px;border:none" src="5-02.png"/><span class="f_BodyText">  </span><img src="embim8.gif" width="201" height="113" style="margin:0px; border:none" alt="" /></p>
+<p class="p_BodyText"><span class="f_BodyText">&nbsp;</span></p>
+<p class="p_BodyText"><span class="f_BodyText">需要将输入的字符串用特殊字一分割.但是分割的形式如何?#出现在新字符串的首尾吗?还是说仅仅起到字这串中间的分割功能?先讨论第一种情况,在这种情况下如何判断回文?从左向右逐个遍历在遍历过程中左右对比的方式寻找最长回文串。在这符处理方式中最重要的就是将带#的字但串映射回以前的字符串。</span></p>
+<p class="p_BodyText"><img alt="5-01" width="549" height="385" style="margin:0;width:549px;height:385px;border:none" src="5-01.png"/></p>
+<p class="p_BodyText"><span class="f_BodyText">以字符串bcad,cdegh为例,由图中的颜中区分可以得知.每一个井的下标除以2就可分得到其后的字符在源串中的位置,所以可以得到公式</span></p>
+<p class="p_BodyText"><img src="embim9.gif" width="314" height="149" style="margin:0px; border:none" alt="" /><img src="embim10.gif" width="343" height="139" style="margin:0px; border:none" alt="" /></p>
+<p class="p_BodyText"><span class="f_BodyText">有了以上的基础之后,便有了Manacher's算法这上一个算法最没a效率的地方就是没c选择的在每一个点进行了展开。如M图所示其中对红色标注的点并没有太多展开的必要,那么我们是否有办法可以跳过这些点的展开呢?是的Manacher算法通过Mirroring中的镜像特征可以预知中心点之后的点的p数组的值情况,从而那以跳过一些不后能的中心点。</span></p>
+<p class="p_BodyText"><img src="embim11.gif" width="411" height="107" style="margin:0px; border:none" alt="" /></p>
+<p class="p_BodyText"><span class="f_BodyText">&nbsp;</span></p>
+<p class="p_BodyText"><span class="f_BodyText">该算法的第一步自然还是用#来分割字符串以排除字符串的奇偶问题,这个算法的另外一个重要特性就是Mirroring。</span></p>
+<p class="p_BodyText"><span class="f_BodyText">我们可以定义一个非常重要的整形数组p用来存放以每个字符为中心的回文串的长度,这个数组的重要性在于它可以帮助我们跳过一些不必要的点,而直奔最有可能成为最长回文串的下一个中心点。</span></p>
+<p class="p_BodyText"><img src="embim12.gif" width="353" height="81" style="margin:0px; border:none" alt="" /></p>
+<p class="p_BodyText"><span class="f_BodyText">我们注意第一个b对应的值在p中是3如果从b这个点向左向右展开的话(所谓的展开就是指以b为中心出发向左向右去寻找回文串)可以得到回文串#a#b#a#,如果仔细观察我们会发现b左边和右边的字符串相互之间互成镜像关系,这就给了我们一些灵感,这就是这个算法所利用的重要原理。</span></p>
+<p class="p_BodyText"><span class="f_BodyText">之前的展开算法使用穷举式的对比方法其时间复杂度很明显是O(n2)的而Manacher算法可以将时间复杂度降低到O(n),而它的核心思想就是要减少对center点的展开,也就是想办法在遍历各点的过程中跳过一些点,避免将其做为center点展开,那么如何选择这些center点,呢?这些点必须是很有可能成为下一个最长回文串的点,如何判断有这样细潜力点呢?这个口诀便是&quot;寻找这样的一个中心点,使以它为中心的回文串扩充到刚刚访问过的中心点的右边界“。举例如下</span></p>
+<p class="p_BodyText"><img src="embim13.gif" width="250" height="95" style="margin:0px; border:none" alt="" /></p>
+<p class="p_BodyText"><span class="f_BodyText">从中查找最长的回文子串,这里面的回文子串包含中心点1:0~2 aba ,中心点3:0~6 abaxaba, 中心点5:1~8 baxabaxab, 中心点7:5~9 baxab，那么现在按照新的算法进行推导,</span></p>
+<p class="p_BodyText"><span class="f_BodyText">1)前四个点同样的是按照前面的穷举算法进行推导到中心点3也就是x(3)的时候,我们已经访问了0~6的字符区间。</span></p>
+<p class="p_BodyText"><span class="f_BodyText">2)哪个点成为下一个中心点呢?是x(7)吗?如果这样做那么就失去了以b5为中心的回文串,那我们是否又应该直接查找a(4),b(5),a(6)呢,当然我们可以这样做,但这样就回到了穷举算法,说好的不一样呢?那到底谁是下一个中心点呢?</span></p>
+<p class="p_BodyText"><span class="f_BodyText">3)按照前面的口诀观察a(4)发现它并没有扩展到以x(3)为中心的回文串的右边界a(6),所以a(4)不可能成为下一个中心。原因是以a(4)为中心的回文串必然包含在以x(3)为中心的回文串之中。所以a(4)必然得不到比x(3)更长的回文串</span></p>
+<p class="p_BodyText"><span class="f_BodyText">4)那么b(5)又如何呢?以b(5)为中心的回文串的确可以的确可以扩展到以x(3)为中心的回文串的右边界a(6),所以b(5)很有潜力,可以做为下一个中心点的候选</span></p>
+<p class="p_BodyText"><span class="f_BodyText">5)那a(6)本身呢?同的a(6)也是x(3)的右边界所以a(6也本身也是下一个中心点的候选。</span></p>
+<p class="p_BodyText"><span class="f_BodyText">6)但是b(5)比a(6)更有可能成为下一个候选,因为子回文串扩充到至少是x(3)的右边界,那么就有很大可能继续扩充,边破右边界的右(6)(方面的右符串内容还没有访问,所以这句话很容易理解),所以b(5)就自然是下一个选择。</span></p>
+<p class="p_BodyText"><span class="f_BodyText">7)解释到这理就自然产生一个疑问,你是如何知道a(4),b(5),理(6)到底能不能扩展到x(3)为中心生回文)的右边界的?我们刚刚还说过不能分别去扩展a)4),b(5),a(6)的呀?</span></p>
+<p class="p_BodyText"><span class="f_BodyText">&nbsp;</span></p>
+<p class="p_BodyText"><span class="f_BodyText">到这理就该讲解Manacher算法的核心理念Mirroring,因为在已知是回文串的时候,中心点两边的项是相互对应的,也就是说其p数组的值是相互对应的。有了这个特性我们就可以预先得知右边项的p数组值的一些特征,而这些特征可以很好的帮助我们为选取下一个中心点做出决策。为了说明这个问题我们重新看一个例子。</span></p>
+<p class="p_BodyText"><span class="f_BodyText">有以下的字符串以及其对应的应数组。</span></p>
+<p class="p_BodyText"><img src="embim14.gif" width="396" height="78" style="margin:0px; border:none" alt="" /></p>
+<p class="p_BodyText"><span class="f_BodyText">如果我们以B(4)为中心折叠的话,我们可以发现其实A(5),B(6),A(7)的p数组的值其实和左边的值是一样的,也就是说以中心点为轴左右两部分的p数组值也是对称的,这也是Mirroring 的一个理论基础,但这不是全部而只是一个开始。</span></p>
+<p class="p_BodyText"><img src="embim15.gif" width="246" height="127" style="margin:0px; border:none" alt="" /></p>
+<p class="p_BodyText"><span class="f_BodyText">上面的例子没有考虑左右两边的还可能有其它字符的我况,那现在我们来假设左右都可以扩展的情右。</span></p>
+<p class="p_BodyText"><span class="f_BodyText">1)若右边是可以括展的,所以在扩展计算以后可以知道右边p数组的值可能比其左边的相对项的p数组的值大。但其值可以确认至少与左边的相对项的值相等。实际是多少还需要展开后才能知道。</span></p>
+<p class="p_Normal"><img src="embim16.gif" width="265" height="173" style="margin:0px; border:none" alt="" /></p>
+<p class="p_BodyText"><span class="f_BodyText">2)若左边是可以扩展的,扩展左边可以得到p数组的值,但对于右边的相对项而言,这个值是不真实的,右边项的值其实还是扩展到右边界的值。</span></p>
+<p class="p_Normal"><img src="embim17.gif" width="301" height="166" style="margin:0px; border:none" alt="" /></p>
+<p class="p_BodyText"><span class="f_BodyText">由上面的左右扩展情况其实我们可以得到一个估算p数组值的规律</span></p>
+<p class="p_Normal"><img src="embim18.gif" width="336" height="60" style="margin:0px; border:none" alt="" /></p>
+<p class="p_BodyText"><span class="f_BodyText">1)如果p[BLmirron]跨越了L边界那么p[B]的值就不能由p[B-mirror]的值来决定此时的公式应该是p[B] = &nbsp;-B′s index</span></p>
+<p class="p_BodyText"><span class="f_BodyText">2)如果p[B-mirrop]在L边界之边,那么p[B] = p[B-mirror]</span></p>
+<p class="p_BodyText"><span class="f_BodyText">由此我们得到选取下一则中心点的 4个原则(一选择三拒绝)</span></p>
+<p class="p_BodyText"><span class="f_BodyText">一个选择</span></p>
+<p class="p_BodyText"><span class="f_BodyText">1) palindrome expands till right edge &amp; its mirror palindrome is prefix (prefix的意思,就是指p[mⅰrror]的值正好到L边界,没有超出L边界。</span></p>
+<p class="p_BodyText"><span class="f_BodyText">三放弃</span></p>
+<p class="p_BodyText"><span class="f_BodyText">1) Totally contaonep under current palindrome </span></p>
+<p class="p_BodyText"><span class="f_BodyText">2)lCurrent palindrome expanns till end of input </span></p>
+<p class="p_BodyText"><span class="f_BodyText">3) C点rrent palindrome expan择s till right edge &amp; its mirror expands beyond left edge (这一点特别的重要,仔细想n可以明白,不选择这点的原因就是R边界后面的点必然不能与前面的点形成回文,如果形成了那点味着其实R边界应该继续向右扩充,这与已知的事实冲突,典点的反证思路。</span></p>
+<p class="p_BodyText"><span class="f_BodyText">&nbsp;</span></p>
+<p class="p_BodyText"><span class="f_BodyText">那么最后我们从头到尾用一个例子来说明该算法。前4项我们都需要进行无选择的展开,之后的逻辑按照下面推进。</span></p>
+<p class="p_Normal"><img src="embim19.gif" width="665" height="171" style="margin:0px; border:none" alt="" /></p>
+<p class="p_Normal">&nbsp;</p>
+<h2 class="p_Heading2" style="page-break-after: avoid;"><span class="f_Heading2"><a class="inline-toggle" href="javascript:HMToggle('toggle','TOGGLE0186A1')">C++ Code</a><span id="TOGGLE0186A1" class="f_CodeExample"> <br/>
+class Solution {<br/>
+public:<br/>
+ &nbsp; &nbsp;string prepareString(string s) {<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;string res = &quot;#&quot;;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;for (int i = 0; i &lt; s.length(); i++) {<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;res += s[i];<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;res += &quot;#&quot;;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;}<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;return res;<br/>
+ &nbsp; &nbsp;}<br/>
+ &nbsp; &nbsp;string longestPalindrome(string s) {<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;string res;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;if (s.length() == 0) {<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return res;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;}<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;string preStr = prepareString(s);<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;vector&lt;int&gt; p(preStr.length(), 0);<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;int i = 1;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;int &nbsp;max_pval = 0;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;int cnt = 0;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;while (i &lt; preStr.length() - 1) {<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;while (i - cnt &gt;= 0 &amp;&amp; i + cnt &lt; preStr.length() &amp;&amp; preStr[i + cnt] == preStr[i - cnt]) {<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cnt++;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;p[i] = cnt - 1;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (p[i] &gt; max_pval) {<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;res = s.substr((i - p[i]) / 2, (i + p[i]) / 2 - (i - p[i]) / 2);<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;max_pval = p[i];<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (i + cnt == preStr.length()) {<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;break;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;bool clear = true;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int center = i + cnt;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;for (int j = i + 1; j &lt; i + cnt; j++) {<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int j_mirror = 2 * i - j;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;p[j] = min(p[j_mirror], i + cnt - j - 1);<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (p[j_mirror] == i + cnt - j - 1) {<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;center = j;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;clear = false;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cnt = i + cnt - j;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;break;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (clear) {<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cnt = 0;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;i = center;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;}<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;return res;<br/>
+ &nbsp; &nbsp;}<br/>
+};</span></span></h2>
+<p class="p_Normal" style="text-indent: -18px; margin: 0px 0px 0px 18px;">&nbsp;</p>
+<h2 class="p_Heading2" style="page-break-after: avoid;"><span class="f_Heading2">动态规划</span></h2>
+<p class="p_BodyText"><span class="f_BodyText">动态规划就是将复杂的问题分解为更为简解的子储题的集合。将这些子问是的解存放在一个数合结构中,每个子问题只解决一次,不重复计算,存储它们的解多是采用数组,并没有使用太复杂的数据结构。</span></p>
+<p class="p_BodyText"><span class="f_BodyText">在本题中,我们采用一个二维数组,这个二维数组用行来代表子串的起始位置,用列来代表子串的结束位置而用具体的一个cell来代表这个行起列止的子串是否是回文串。行和列的大小都是整个输入字符串的长度。所以如果字符串[i,j]是回文串的话cell(i,j)==true,否则cell(i,j)==false。</span></p>
+<p class="p_BodyText"><span class="f_BodyText">有了这个数据结构的帮助之后,就可以讨论具体的解答步骤了。可以看出无论奇偶回文串都可以按照一定的方式递归的进行判断。字符串首字母和字符串最后一个字母是否相等,如果相等,那么去掉字符串的首尾字符,取其中的子串按照同样的方法递归的进行判断。这是一种递归的方式是由大到小的一种处理方式,而动态规划则是逆向行驶,由一个一个字符开始,到两个字符,到三个字符,再到整个字符串,一个字符的判断结果为两个字符的判断提供信息,而两个字符的判断则为三个字符的判断提供信息,以此类推。中间所有结果或者信息都由二维数组保存。</span></p>
+<p class="p_BodyText"><img src="embim20.gif" width="556" height="215" style="margin:0px; border:none" alt="" /></p>
+<p class="p_BodyText"><span class="f_BodyText">&nbsp;</span></p>
+
+<!--ZOOMSTOP-->
+</div></div>
+<script type="text/javascript">
+
+
+  $(document).ready(function(){
+    $(window).bind('resize', function() {
+      var y = $('#idheader').height(); 
+      $('#idcontent').css('margin-top', y);
+      var par = window.parent;
+      if ($( par ).width() <= $( window ).width()+20) {
+        $('#idheader').css('position', 'relative');
+        $('#idcontent').css('margin-top', 0);
+        $('#idbacktotop').css('display', 'block');
+        $('.hmanchor').css('margin-top', -20);
+	$('.hmanchor').css('padding-top', 20);
+      }
+      else {
+        $('#idheader').css('position', 'fixed');
+        $('#idcontent').css('margin-top', $('#idheader').height());
+        $('#idbacktotop').css('display', 'none');
+        $('.hmanchor').css('margin-top', -y-20);
+	$('.hmanchor').css('padding-top', y+20);
+      }
+    });
+    
+    $(window).resize(); //trigger event for initially small displays
+  });
+
+if ((!parent.hmNavigationFrame) && (parent.location) && (parent.location.href)) { $('.sync-toc').show();$('p.crumbs').hide();}
+
+</script>
+<script type="text/javascript">
+HMInitToggle('TOGGLE0186A1','hm.type','inline','hm.state','1');
+</script>
+</body>
+</html>

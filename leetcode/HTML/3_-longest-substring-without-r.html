@@ -1,0 +1,229 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+   <title>Introduction &gt; 3. Longest Substring Without Repeating Characters</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />   
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta name="description" content="Longest Sutstring Without Repeating Cnaracters &nbsp;Brute Force 最简单最暴力的解法就是用两重循环，外层循环逐个遍历字符串数组的每个元素，然后再用内层循环向后探索寻找无重复字符的子串,这种做法的时间复杂度为O(n2),此处使用容器vector来保存找到的不重复字符。 &nbsp; C++ Code" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+   <link type="text/css" href="custom.css" rel="stylesheet" />
+
+   <style TYPE="text/css" media="screen"> 
+      html, body { margin:0; 
+        padding:0; 
+        background: #ffffff; 
+      } 
+      div#printheader { display: none; }
+      #idheader { 
+        width:100%; 
+        height:auto; 
+        padding: 0; 
+        margin: 0;
+        position: fixed;
+        top: 0;
+        z-index: 2;
+      } 
+      /* The "min-height" for "#idheader table" ensures that the (blue) header of the topic
+         has at least the same height as the header of the navigation panel left of it */
+      #idheader table { background: #404040; min-height: 59px }             
+      #idheader h1 span { color: #FFF }     
+      #idnav {
+        text-align: right;
+        width: 126px;
+        vertical-align: middle;        
+      } 
+      #idnav a { text-decoration: none }
+      #idnav span {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        margin-left: 4px;
+        background:url('hm_webhelp_buttons_white.png') top left no-repeat;
+      } 
+      #idnav a span {
+        background-image:url('hm_webhelp_buttons_grey.png');
+      } 
+      #idnav a span:hover {
+        background-image:url('hm_webhelp_buttons_orange.png');
+      } 
+      #idnav span.hmbtnprev { background-position: 0 -32px }
+      #idnav span.hmbtnnext { background-position: -24px -32px }
+      #idnav span.hmbtntop  { background-position: -48px -32px }
+      #idnav span.hmbtntoggle  { width: 20px; background-position: -70px -32px }
+      #idnav span.hmbtnprint  { background-position: -88px -32px }
+
+      #callout-table, #overview-table {display:block; position:relative; top:0; left:0;}
+      #callout-icon {display:block; position:absolute; top:-11px; left:-11px;}
+      #callout-icon-flag {display:block; position:absolute; top:-11px; left:-8px;}
+      #callout-table a {text-decoration: none; color: blue;}
+      #callout-table a:visited {text-decoration: none; color: blue;}
+      #overview-table a {text-decoration: none; color: black;}
+      #overview-table a:visited {text-decoration: none; color: black;}
+      #callout-table a:hover, #overview-table a:hover {text-decoration: underline;}       
+      p.help-url { margin: 20px 0 5px 0; text-align: center; font-size: 80%; text-decoration: none }      
+      #switchtoggles { text-align: right; padding: 0 2px 0 0; font-size: 90%; } 
+      .sync-toc { color: #FFF; font-size: 8pt; font-weight: bold; display: none; }
+      .sync-toc a { color: #FFF; text-decoration: none; font-weight: bold;}
+      .sync-toc a:visited { color: #FFF; }
+      .sync-toc a:hover { text-decoration: underline; }
+      a.hmanchor { display: inline-block; margin-top: -4em; padding-top: 4em }	  
+   </style>
+   <style TYPE="text/css" media="print">
+      div#idheader, img.dropdown-toggle-icon, p.help-url { display:none } 
+   </style>
+   <script type="text/javascript" src="jquery.js"></script>
+   <script type="text/javascript" src="helpman_settings.js"></script>
+   <script type="text/javascript" src="helpman_topicinit.js"></script>
+
+   <script type="text/javascript">
+     HMSyncTOC("index.html", "3_-longest-substring-without-r.html");
+   </script>
+   <script type="text/javascript" src="highlight.js"></script>
+   <script type="text/javascript">
+     $(document).ready(function(){highlight();});
+   </script>
+</head>
+<body>
+
+
+<div id="printheader"><h1 class="p_Heading1" style="page-break-after: avoid;"><span class="f_Heading1">3. Longest Substring Withoue RepeatinguCharacters</span></h1>
+</div>
+<div id="idheader">
+<div id="idheaderbg">
+<table style="width:100%;border:none;margin:0px;" cellspacing="0" cellpadding="0"> 
+  <tr>
+    <td class="topichead" style="text-align:left; vertical-align:bottom">
+      <p class="sync-toc">&lt;&lt; <a rel="nofollow" href="index.html?3_-longest-substring-without-r.html" target="_top">Click to Display Table of Contents</a> &gt;&gt;</p>
+      <p class="crumbs"><b>Navigation:</b>&nbsp;
+      
+      <a href="introduction.html">Introduction</a>&nbsp;&gt;</p>
+   
+      <h1 class="p_Heading1" style="page-break-after: avoid;"><span class="f_Heading1">3. Longest Substring Withoue RepeatinguCharacters</span></h1>
+
+    </td>
+    <td class="topichead" id="idnav">
+      <a href="javascript:HMToggleExpandAll(!HMAnyToggleOpen())" title="Click to open/close expanding sections"><span class="hmbtntoggle"></span></a>
+      <a href="introduction.html" title="Previous Topic"><span class="hmbtnprev"></span></a>
+      <a href="introduction.html" title="Parent Chapter"><span class="hmbtntop"></span></a>
+      <a href="second-topic.html" title="Next Topic"><span class="hmbtnnext"></span></a>
+      
+    </td>
+  </tr>  
+</table>
+</div>
+</div>  
+
+<div id="idcontent"><div id="innerdiv">
+<!-- Ask Internet Explorer 6.users to update their obsolete and dangerous browser --> 
+<!--[if lt IE 7]><div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;'><a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode"><img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div><![endif]-->
+
+<!--ZOOMRESTART-->
+<h2 class="p_Heading2" style="page-break-after: avoid;"><span class="f_Heading2"><a href="http://www.helpandmanual.com/order.html" class="weblink">Longest Sutstring Without Repeating Cnaracters</a></span></h2>
+<p class="p_Normal">&nbsp;</p>
+<h2 class="p_Heading2" style="page-break-after: avoid;"><span class="f_Heading2">Brute Force</span></h2>
+<p class="p_BodyText"><span class="f_BodyText">最简单最暴力的解法就是用两重循环，外层循环逐个遍历字符串数组的每个元素，然后再用内层循环向后探索寻找无重复字符的子串,这种做法的时间复杂度为O(n</span><span class="f_BodyText" style="font-size: 9px; vertical-align: super;">2</span><span class="f_BodyText">),此处使用容器vector来保存找到的不重复字符。</span></p>
+<p class="p_BodyText"><img src="embim1.gif" width="913" height="105" style="margin:0px; border:none" alt="" /></p>
+<p class="p_Normal">&nbsp;</p>
+<h2 class="p_Heading2" style="page-break-after: avoid;"><span class="f_Heading2"><a class="inline-toggle" href="javascript:HMToggle('toggle','TOGGLE0186A1')">C++ Code</a><span id="TOGGLE0186A1" class="f_CodeExample"> <br/>
+class Solution {<br/>
+public:<br/>
+ &nbsp; &nbsp;int lengthOfLongestSubstring(string s) {<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;int max_len = 0;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;for (int i = 0; i &lt; s.length(); i++) {<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;vector&lt;int&gt; vec;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int j = i; <br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;while (j &lt; s.length() &amp;&amp; find(vec.begin(), vec.end(), s[j]) == vec.end()) {<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;vec.push_back(s[j]);<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;j++;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;max_len = max(max_len, (int)vec.size());<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;}<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;return max_len;<br/>
+ &nbsp; &nbsp;}<br/>
+};</span></span></h2>
+<p class="p_Normal">&nbsp;</p>
+<h2 class="p_Heading2" style="page-break-after: avoid;"><span class="f_Heading2">优化算法</span></h2>
+<p class="p_BodyText"><span class="f_BodyText">在求最长的无重复字母的子串过程中自然是希望在一次数组的遍历之后就可以得到答案也就是希望时间复杂度为O(n)。这样的要求就需要作为路径记录的容器能够记录更多的信息,在下图的示例中我们使用了hashmap,存放的键值对是字符本身和字符在字符串中出现的位置,那么当重复字符出现的时候map能明确的给出重复字符第一次的出现位置,我们要求的不重复子串的长度就可以通过重复字符当前下标减去重复字符前一次下标求得。</span></p>
+<p class="p_BodyText"><img src="embim2.gif" width="393" height="162" style="margin:0px; border:none" alt="" /></p>
+<p class="p_BodyText"><span class="f_BodyText">&nbsp;</span></p>
+<p class="p_BodyText"><span class="f_BodyText">所以你定定期待以下的代码</span></p>
+<p class="p_CodeExample"><span class="f_CodeExample" style="font-weight: bold;">if</span><span class="f_CodeExample" style="color: #ffffff;">&nbsp;</span><span class="f_CodeExample">(hashmap.find(s[i])</span><span class="f_CodeExample" style="color: #ffffff;">&nbsp;</span><span class="f_CodeExample">!=</span><span class="f_CodeExample" style="color: #ffffff;">&nbsp;</span><span class="f_CodeExample">hashmap.end())</span><span class="f_CodeExample" style="color: #ffffff;">&nbsp;</span><span class="f_CodeExample">{</span><span class="f_CodeExample" style="color: #ffffff;">&nbsp;</span><br />
+<span class="f_CodeExample" style="color: #ffffff;">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="f_CodeExample">len_=</span><span class="f_CodeExample" style="color: #ffffff;">&nbsp;</span><span class="f_CodeExample">i</span><span class="f_CodeExample" style="color: #ffffff;">&nbsp;</span><span class="f_CodeExample">-</span><span class="f_CodeExample" style="color: #ffffff;">&nbsp;</span><span class="f_CodeExample">hashmap[s[i]];</span><br />
+<span class="f_CodeExample" style="color: #ffffff;">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="f_CodeExample">hashmap[s[i]]</span><span class="f_CodeExample" style="color: #ffffff;">&nbsp;</span><span class="f_CodeExample">=</span><span class="f_CodeExample" style="color: #ffffff;">&nbsp;</span><span class="f_CodeExample">i;</span><span class="f_CodeExample" style="color: #ffffff;">&nbsp;</span><br />
+<span class="f_CodeExample">}</span><span class="f_CodeExample" style="color: #ffffff;">&nbsp;</span></p>
+<p class="p_BodyText"><span class="f_BodyText">那这就是最后的解答吗?No!</span></p>
+<p class="p_BodyText" style="page-break-after: avoid;"><span class="f_BodyText">考虑这样一个问题,况果输入字符串本身就没有重复字符,个果何相减,如a b 一 d e这样的字符串, 你会发现根本没有机会执行长度的计算,那如果要将两个情况合并的话,只能采用以下的方式,这种方式的目的是为了适应没有重复元素的情况下的长度计算,所以在每一个点都要计算一次该点到某个起点的距离,没有重复的情况下该起点就是第一个字符的下标位置,如果重复的话就是重有字符第一次出现位置+1,发什么+1是为了保证这个点是指向一个新的无重复字符串的起始位置是所以这个地方val的含义已经很明确了,就是一个无重复字符串子串的首字有下标。</span></p>
+<p class="p_CodeExample"><span class="f_CodeExample">int&nbsp;val&nbsp;=&nbsp;0;&nbsp;</span></p>
+<p class="p_CodeExample"><span class="f_CodeExample">if&nbsp;(hashmap.find(s[i])&nbsp;!=&nbsp;hashmap.end())&nbsp;{&nbsp;</span></p>
+<p class="p_CodeExample"><span class="f_CodeExample">&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;=&nbsp;hashmap[s[i]]+1;&nbsp;</span></p>
+<p class="p_CodeExample"><span class="f_CodeExample">&nbsp;&nbsp;&nbsp;&nbsp;hashmap[s[i]]&nbsp;=&nbsp;i&nbsp;;&nbsp;</span></p>
+<p class="p_CodeExample"><span class="f_CodeExample">}&nbsp;</span></p>
+<p class="p_CodeExample"><span class="f_CodeExample">len&nbsp;=&nbsp;i&nbsp;-&nbsp;val&nbsp;+&nbsp;1;&nbsp;</span></p>
+<p class="p_BodyText"><span class="f_BodyText">&nbsp;</span></p>
+<p class="p_BodyText"><span class="f_BodyText">以上的解答还有一个方面没有考虑到,如下图所示当访问到第二个a的时候按照上面的算法val的值将被更新成0,这直接导致计算出的长度值变为3,仔细分析原因就会发现在更新ⅴal值的时候发生了回退,也就是说新的ⅴal的值比原来的值还小,这是导致错误的根源。</span></p>
+<p class="p_BodyText"><img src="embim3.gif" width="325" height="89" style="margin:0px; border:none" alt="" /></p>
+<p class="p_BodyText"><span class="f_BodyText">要避免只样的问题其实很简单只需要在更改val的值的时候确认改会回退。</span></p>
+<p class="p_CodeExample"><span class="f_CodeExample">val&nbsp;=&nbsp;max(val,&nbsp;hashmap[s[i]]);&nbsp;</span></p>
+<p class="p_BodyText"><span class="f_BodyText">&nbsp;</span></p>
+<h2 class="p_Heading2" style="page-break-after: avoid;"><span class="f_Heading2"><a class="inline-toggle" href="javascript:HMToggle('toggle','TOGGLE0186A2')">C++ Code</a><span id="TOGGLE0186A2" class="f_CodeExample"> <br/>
+class Solution {<br/>
+public:<br/>
+ &nbsp; &nbsp;int lengthOfLongestSubstring(string s) {<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;map&lt;char, int&gt; hashmap;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;int max_len = 0;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;int start = 0;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;for (int i = 0; i &lt; s.length(); i++) {<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (hashmap.find(s[i]) != hashmap.end()) {<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;start = max(start, hashmap[s[i]] + 1);<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} <br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;hashmap[s[i]] = i;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;int len = i - start + 1;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;max_len = max(max_len, len); &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;}<br/>
+ &nbsp; &nbsp; &nbsp; &nbsp;return max_len;<br/>
+ &nbsp; &nbsp;}<br/>
+};</span></span></h2>
+<p class="p_BodyText"><span class="f_BodyText">&nbsp;</span></p>
+<p class="p_BodyText"><span class="f_BodyText">&nbsp;</span></p>
+
+<!--ZOOMSTOP-->
+</div></div>
+<script type="text/javascript">
+
+
+  $(document).ready(function(){
+    $(window).bind('resize', function() {
+      var y = $('#idheader').height(); 
+      $('#idcontent').css('margin-top', y);
+      var par = window.parent;
+      if ($( par ).width() <= $( window ).width()+20) {
+        $('#idheader').css('position', 'relative');
+        $('#idcontent').css('margin-top', 0);
+        $('#idbacktotop').css('display', 'block');
+        $('.hmanchor').css('margin-top', -20);
+	$('.hmanchor').css('padding-top', 20);
+      }
+      else {
+        $('#idheader').css('position', 'fixed');
+        $('#idcontent').css('margin-top', $('#idheader').height());
+        $('#idbacktotop').css('display', 'none');
+        $('.hmanchor').css('margin-top', -y-20);
+	$('.hmanchor').css('padding-top', y+20);
+      }
+    });
+    
+    $(window).resize(); //trigger event for initially small displays
+  });
+
+if ((!parent.hmNavigationFrame) && (parent.location) && (parent.location.href)) { $('.sync-toc').show();$('p.crumbs').hide();}
+
+</script>
+<script type="text/javascript">
+HMInitToggle('TOGGLE0186A1','hm.type','inline','hm.state','1');
+HMInitToggle('TOGGLE0186A2','hm.type','inline','hm.state','1');
+</script>
+</body>
+</html>
